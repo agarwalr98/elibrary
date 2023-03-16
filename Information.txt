@@ -1,0 +1,21 @@
+Currently, we are connecting to embedded tomcat server using dependency - tomcat-starter-web. 
+Wnat to connect with external tomcat version, do the following - 
+    a. Copy this in ~/.m2/settings.xml (The below username and password is the username and password maven required to connect with tomcat server and that is defined at /opt/tomcat/conf/tomcat-users.xml)
+        <server>
+            <id>tomcatserver</id>
+            <username>tomcat</username>
+            <password>maven-tomcat-plugin</password>
+        </server>  
+    b. Add this plugin in pom.xml So, maven can connect with tomcat. 
+        <plugin> 
+            <groupId>org.apache.tomcat.maven</groupId>
+            <artifactId>tomcat7-maven-plugin</artifactId>
+            <version>2.0</version>
+            <configuration>
+                <url>http://localhost:8080/manager/text</url>
+                <path>/rps</path>
+                <username>tomcat</username>
+                <password>maven-tomcat-plugin</password>
+            </configuration>
+        </plugin>
+    c. You might get 401 error or connection refused. Check the username, and password configured properly. 
